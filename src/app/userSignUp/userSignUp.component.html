@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 inputArea">
+      <form class="text-center" [formGroup]="signupForm" (ngSubmit)="signUp()">
+        <h2 class="my-4">User Sign Up</h2>
+        <input type="text" class="form-control my-4" formControlName="name" placeholder="Enter Your Name">
+        <input type="text" class="form-control my-4" formControlName="username" placeholder="Enter Username">
+        <input type="text" class="form-control my-4" formControlName="password" placeholder="Enter Password">
+        <button class="btn btn-primary" >Signup</button><br><br>
+
+        <a routerLink="/userLogin">Already Have an Account ? Login</a>
+
+
+      </form>
+    </div>
+    <!-- {{loginForm.value|json}} -->
+    <div class="col-md-4"></div>
+  </div>
+</div>

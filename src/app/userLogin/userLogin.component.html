@@ -2,9 +2,13 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 inputArea">
-      <input type="text" class="form-control my-4" placeholder="username">
-      <input type="text" class="form-control my-4" placeholder="password">
-      <button class="btn btn-primary float-end">Login</button>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="text-center">
+        <h2 class="">User Login</h2>
+        <input type="text" class="form-control mb-4" formControlName="username" placeholder="username">
+        <input type="text" class="form-control my-4" formControlName="password" placeholder="password">
+        <button class="btn btn-primary">Login</button><br><br>
+        <a routerLink="/userSignUp">Don't Have An Account ? Register One</a>
+      </form>
     </div>
     <div class="col-md-4"></div>
   </div>

@@ -1,20 +1,29 @@
 <div class="container-fluid my-5">
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <!-- <a class="nav-link" *ngIf="addBlogButton">Add Blogs </a> -->
 
-        <div class="col-md-8 m-4">
-            <div *ngFor="let item of blogList" class="blogCard ">
+        </div>
+
+        <div class="col-md-8">
+            <div class="addBtn text-center">
+                <button class="btn btn-primary" *ngIf="userlogged">Add Blog</button>
+            </div>
+            <div *ngFor="let item of blogList" class="blogCard  m-4">
                 <div class="card my-4 " style="width: auto">
                     <div class="card-body">
                         <h5 class="card-title my-3">{{item.name}}</h5>
+                        <h3 *ngFor="let itemReview of item.comments">{{itemReview.username}} {{itemReview.review}}</h3>
                         <h6 class="card-text my-3"><fa-icon [icon]="faUser" class="m-2"></fa-icon> {{item.author}}</h6>
                         <p>{{item.content|wordLimitter}} . . . . . . . . . . . </p>
                         <h6>{{item.date|date}}</h6>
-                        <a href="#" class="btn btn-success float-end">Read More</a>
+                        <a class="btn btn-success float-end" (click)="readMore(item.id)">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button class="btn btn-danger" (click)="logout()" *ngIf="userlogged">Logout</button>
+        </div>
     </div>
 </div>

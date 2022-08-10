@@ -10,22 +10,25 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UserLoginComponent} from './userLogin/userLogin.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserSignUpComponent } from './userSignUp/userSignUp.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     ShowBlogComponent,
     WordLimitterPipe,
     HeaderComponent,
-    UserLoginComponent
-    
-  ],
+    UserLoginComponent,
+      UserSignUpComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
