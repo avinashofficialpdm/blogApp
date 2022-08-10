@@ -1,0 +1,20 @@
+<div class="container-fluid my-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8 m-4">
+            <div *ngFor="let item of blogList" class="blogCard ">
+                <div class="card my-4 " style="width: auto">
+                    <div class="card-body">
+                        <h5 class="card-title my-3">{{item.name}}</h5>
+                        <h6 class="card-text my-3"><fa-icon [icon]="faUser" class="m-2"></fa-icon> {{item.author}}</h6>
+                        <p>{{item.content|wordLimitter}} . . . . . . . . . . . </p>
+                        <h6>{{item.date|date}}</h6>
+                        <a href="#" class="btn btn-success float-end">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
