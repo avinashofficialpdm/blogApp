@@ -14,21 +14,24 @@ export class ShowBlogComponent implements OnInit {
   faUser = faUser
   blogList: any[] = []
   userlogged: boolean = false
+  loggedUser:any
+ 
+  
 
   constructor(private _serv: BlogAppService, private _rout: Router) { }
 
   ngOnInit(): void {
     this._serv.getBlogs().subscribe((res: any) => {
       this.blogList = res
-      // this.blogList.sort(function(a,b){
-      //   return new Date(b.date)- new Date(a.date)
-      // })
       console.log(this.blogList);
 
     })
 
     if (localStorage.getItem('userLoggedIn')) {
       this.userlogged = true
+      this.loggedUser=localStorage.getItem("userLoggedIn")
+      console.log(this.loggedUser);
+      
     }
   }
 
@@ -47,6 +50,10 @@ export class ShowBlogComponent implements OnInit {
       this._rout.navigateByUrl("")
       window.location.reload()
     }
+  }
+
+  addBlog(){
+    this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
 
 }

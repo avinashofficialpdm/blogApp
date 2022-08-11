@@ -28,9 +28,10 @@ export class UserLoginComponent implements OnInit {
         let currentUser = res.find((element:any)=>element.username==this.loginForm.value.username)
         if(currentUser.password==this.loginForm.value.password){
           this.loggedUsername=this.loginForm.value.username
-          localStorage.setItem("userLoggedIn",this.loggedUsername)
+          localStorage.setItem("userLoggedIn",currentUser.id)
           alert("Login success")
           this._rout.navigateByUrl("")
+          
 
         }else{
           alert("Wrong password")

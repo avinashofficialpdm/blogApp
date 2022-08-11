@@ -6,8 +6,8 @@
             <p style="text-align: justify;">{{currentBlog.content}}</p>
             <div class="comments">
                 <h2>Comments</h2>
-                <textarea name="" id="" cols="50" rows="3"></textarea><br>
-                <button class="btn btn-success my-2">Add comment</button><br><br>
+                <textarea name="" id="" cols="50" rows="3" class="form-control w-50" [(ngModel)]="commentText"></textarea><br>
+                <button class="btn btn-success my-2" (click)="addComment()">Add comment</button><br><br>
                 <div class="usersComments">
                     <div *ngFor="let comment of comments" class="card p-1 my-2" >
                         <p style="font-size:larger;"><i class="fa-solid fa-user-large"></i> {{comment.username}}</p>

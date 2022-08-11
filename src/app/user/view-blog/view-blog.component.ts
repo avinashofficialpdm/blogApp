@@ -9,28 +9,34 @@ import { BlogAppService } from 'src/app/core/Services/blog-app.service';
 })
 export class ViewBlogComponent implements OnInit {
 
-  currentBlogId:any
-  currentBlog:any
-  comments:any[]=[]
-  constructor(private route:ActivatedRoute,private serv:BlogAppService) { }
+  currentBlogId: any
+  currentBlog: any
+  comments: any[] = []
+  currentUser: any
+  constructor(private route: ActivatedRoute, private serv: BlogAppService) { }
 
+  commentText = ""
   ngOnInit(): void {
-    this.currentBlogId=this.route.snapshot.paramMap.get("id")
-    this.serv.getBlogs().subscribe((res:any)=>{
-      this.currentBlog=res.find((element:any)=>element.id==this.currentBlogId)
+    this.currentBlogId = this.route.snapshot.paramMap.get("id")
+    this.serv.getBlogs().subscribe((res: any) => {
+      this.currentBlog = res.find((element: any) => element.id == this.currentBlogId)
+      this.comments = this.currentBlog.comments
+
     })
-  
-    this.serv.getComments().subscribe((res:any)=>{
-      res.forEach((comment:any) => {
-        if(comment.blog==this.currentBlog.name){
-          this.comments.push(comment)          
-        }
-      });
+    this.serv.getUsers().subscribe((res: any) => {
+      this.currentUser = res.find((user: any) => user.id == localStorage.getItem("userLoggedIn"))
     })
-   
-    
-    
-    
+
   }
+
+  addComment() {
+    this.serv.getBlogs().subscribe((res: any) => {
+      let clickedBlog = res.find((blog: any) => blog.name == this.currentBlog.name)
+      clickedBlog.comments.push({ "username": this.currentUser.username, "review": this.commentText })
+      this.serv.addComment(this.currentBlogId, clickedBlog)
+
+    })
+  }
+
 
 }

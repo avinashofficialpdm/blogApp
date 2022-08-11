@@ -6,7 +6,7 @@ import { ViewBlogComponent } from './view-blog/view-blog.component';
 
 const routes: Routes = [
   {
-    path:'addBlog',
+    path:'addBlog/:id',
     component:AddBlogComponent,
     canActivate:[LoginGuard]
   },
