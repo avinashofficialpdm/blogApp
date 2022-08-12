@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Blog } from '../Models/blog';
-import { user } from '../Models/user';
+import { Router, RouterLink } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +28,18 @@ export class BlogAppService {
 
   addBlog(blog: any) {
     this._http.post("http://localhost:3000/blogs", blog).subscribe({
-      next() { alert("success") },
+      next() { alert("success");},
       error() {
         console.log(Error);
+        alert("Failed")
       }
     })
   }
+
+  // addBlog(blog: any) {
+  //  return this._http.post("http://localhost:3000/blogs", blog)
+  // }
+
   addComment(id:number,updatedData:any){
     this._http.put("http://localhost:3000/blogs/"+id,updatedData).subscribe({
       next() { alert("success");
@@ -46,4 +49,5 @@ export class BlogAppService {
       }
     })
   }
+
 }

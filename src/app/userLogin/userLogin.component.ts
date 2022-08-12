@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BlogAppService } from '../core/Services/blog-app.service';
 
@@ -11,11 +11,12 @@ import { BlogAppService } from '../core/Services/blog-app.service';
 export class UserLoginComponent implements OnInit {
 
   loggedUsername:any
+  hide = true;
   constructor(private serv:BlogAppService,private _rout:Router) { }
 
   loginForm=new FormGroup({
-    username:new FormControl(''),
-    password:new FormControl('')
+    username:new FormControl('',[Validators.required]),
+    password:new FormControl('',[Validators.required])
   })
 
   ngOnInit() {
@@ -29,10 +30,9 @@ export class UserLoginComponent implements OnInit {
         if(currentUser.password==this.loginForm.value.password){
           this.loggedUsername=this.loginForm.value.username
           localStorage.setItem("userLoggedIn",currentUser.id)
+          localStorage.setItem("loggedUser",currentUser.name)
           alert("Login success")
           this._rout.navigateByUrl("")
-          
-
         }else{
           alert("Wrong password")
         }

@@ -2,16 +2,19 @@
     <div class="row">
         <div class="col-md-12 p-5 ">
             <h1 class="">{{currentBlog.name}}</h1>
-            <p>{{currentBlog.author}}</p>
+            <p><fa-icon [icon]="faUser" class="m-2"></fa-icon>{{currentBlog.author}}</p>
             <p style="text-align: justify;">{{currentBlog.content}}</p>
             <div class="comments">
-                <h2>Comments</h2>
-                <textarea name="" id="" cols="50" rows="3" class="form-control w-50" [(ngModel)]="commentText"></textarea><br>
-                <button class="btn btn-success my-2" (click)="addComment()">Add comment</button><br><br>
+                <form [formGroup]="addCommentForm">
+                    <h2>Comments</h2>
+                    <textarea  id="" cols="50" rows="3" class="form-control w-50"
+                         formControlName="review"></textarea><br>
+                    <button class="btn btn-success my-2" (click)="addComment()">Add comment</button><br><br>
+                </form>
                 <div class="usersComments">
-                    <div *ngFor="let comment of comments" class="card p-1 my-2" >
-                        <p style="font-size:larger;"><i class="fa-solid fa-user-large"></i> {{comment.username}}</p>
-                        <p>{{comment.review}}</p>
+                    <div *ngFor="let comment of comments" class="card p-1 my-2">
+                        <p><i class="fa-solid fa-user-large"></i> {{comment.username}}</p>
+                        <p  style="font-size:larger;">{{comment.review}}</p>
                     </div>
                 </div>
             </div>

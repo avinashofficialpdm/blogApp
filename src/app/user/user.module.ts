@@ -5,6 +5,11 @@ import { UserRoutingModule } from './user-routing.module';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import { ViewBlogComponent } from './view-blog/view-blog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
+// test for lazy loading
+console.log("loaded");
 
 
 @NgModule({
@@ -16,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ]
 })
 export class UserModule { }

@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon'
+
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UserLoginComponent} from './userLogin/userLogin.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserSignUpComponent } from './userSignUp/userSignUp.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialModule } from './shared/layout/material/material.module';
 
 @NgModule({
   declarations: [	
@@ -28,7 +35,11 @@ import { UserSignUpComponent } from './userSignUp/userSignUp.component';
     HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    MatTabsModule,
+    MatIconModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

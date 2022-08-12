@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogAppService } from 'src/app/core/Services/blog-app.service';
 
 @Component({
@@ -12,7 +12,11 @@ export class AddBlogComponent implements OnInit {
 
   loggedUserId:any
   loggedUser:any
-  constructor(private serv:BlogAppService,private route:ActivatedRoute,private _http:BlogAppService) { }
+  constructor(
+    private serv:BlogAppService,
+    private route:ActivatedRoute,
+    private _http:BlogAppService,
+    private _rout:Router) { }
 
 
   // addBlogForm = new FormGroup({
@@ -20,7 +24,7 @@ export class AddBlogComponent implements OnInit {
   //   content: new FormControl('')
   //   author:new FormControl(this.loggedUser.name)
   // })
-
+  // addBlogForm
 
   ngOnInit(): void {
     this.loggedUserId=this.route.snapshot.paramMap.get("id")
@@ -39,8 +43,10 @@ export class AddBlogComponent implements OnInit {
     formValues.date=new Date()
     formValues.comments=[]
     console.log(formValues);
-    
     this.serv.addBlog(formValues)
+    setTimeout(() => {
+      this._rout.navigateByUrl("")
+    }, 1000);
   }
 
 

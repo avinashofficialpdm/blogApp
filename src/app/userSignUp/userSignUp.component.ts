@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BlogAppService } from '../core/Services/blog-app.service';
 
 @Component({
@@ -9,18 +10,31 @@ import { BlogAppService } from '../core/Services/blog-app.service';
 })
 export class UserSignUpComponent implements OnInit {
 
-  constructor(private serv:BlogAppService) { }
+  hide = true;
+
+  constructor(private serv: BlogAppService,private _rout:Router) { }
 
   signupForm = new FormGroup({
-    name: new FormControl(''),
-    username: new FormControl(''),
-    password: new FormControl('')
+    name: new FormControl('',[Validators.required,Validators.pattern("^[A-Za-z]*$")]),
+    username: new FormControl('',[Validators.required,Validators.pattern("^[A-Za-z0-9]*$")]),
+    password: new FormControl('',[Validators.required])
   })
 
-  signUp(){
-    this.serv.signUpUser(this.signupForm.value)
+  get signupFormControl() {
+    return this.signupForm.controls;
+  }
+
+  signUp(val:any) {
+    console.log(val);
+    
+    // this.serv.signUpUser(this.signupForm.value)
+    // setTimeout(() => {
+    //   this._rout.navigateByUrl("userLogin")
+    // }, 1000);
   }
   ngOnInit() {
+    console.log();
+    
   }
 
 }

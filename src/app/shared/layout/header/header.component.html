@@ -1,12 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
-  <h1 class="navbar-brand" href="#">Let'S BloG</h1>
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark p-3" style="background-color: rgb(96, 67, 179);">
+  <mat-icon class="me-3  text-white">gamepad</mat-icon><h1 class="navbar-brand mt-1" >Let'S BloG</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      
       <li class="nav-item active">
+        <button class="btn btn-outline-light" style="position: absolute; right: 120px; top: 20px;" *ngIf="userlogged"
+          (click)="addBlog()">Add Blog</button>
+      </li>
+      <li class="nav-item active">
+        <h5 class="text-white" style="margin-left: 25em;"  *ngIf="userlogged">Welcome {{nameOfloggedUser}}</h5>
+      </li>
+      <li class="text-white" style="position: absolute; right: 20%; top: 25px;">
+        Number of Blogs : {{countOfBlogs}}
+      </li>
+      <li>
+        <button class="btn btn-danger" style="position: absolute; right: 20px; top: 20px;" (click)="logout()"
+          *ngIf="userlogged">Logout</button>
+        <button class="btn btn-outline-light" style="position: absolute; right: 20px; top: 20px;" (click)="login()"
+          *ngIf="!userlogged">Login</button>
+
       </li>
 
     </ul>
