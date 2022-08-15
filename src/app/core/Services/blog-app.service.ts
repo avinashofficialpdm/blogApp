@@ -42,7 +42,7 @@ export class BlogAppService {
 
   addComment(id:number,updatedData:any){
     this._http.put("http://localhost:3000/blogs/"+id,updatedData).subscribe({
-      next() { alert("success");
+      next() {
     window.location.reload() },
       error() {
         console.log(Error);

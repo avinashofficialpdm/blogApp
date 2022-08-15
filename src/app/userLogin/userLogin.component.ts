@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BlogAppService } from '../core/Services/blog-app.service';
 
+
 @Component({
   selector: 'app-userLogin',
   templateUrl: './userLogin.component.html',
@@ -12,6 +13,8 @@ export class UserLoginComponent implements OnInit {
 
   loggedUsername:any
   hide = true;
+  durationInSeconds = 5;
+
   constructor(private serv:BlogAppService,private _rout:Router) { }
 
   loginForm=new FormGroup({
@@ -42,4 +45,6 @@ export class UserLoginComponent implements OnInit {
       
     })
   }
+
+  
 }

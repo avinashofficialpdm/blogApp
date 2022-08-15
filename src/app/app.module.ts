@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserSignUpComponent } from './userSignUp/userSignUp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from './shared/layout/material/material.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [	
@@ -39,7 +40,8 @@ import { MaterialModule } from './shared/layout/material/material.module';
     NgxPaginationModule,
     MatTabsModule,
     MatIconModule,
-    MaterialModule
+    MaterialModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

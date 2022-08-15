@@ -4,16 +4,21 @@ import { MaterialComponent } from './material.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 const materialModules=[MatFormFieldModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatSnackBarModule
 ]
 @NgModule({
   imports: [
     CommonModule,
-    materialModules
+    materialModules,
+    MatMenuModule
     
   ],
   exports:[materialModules],

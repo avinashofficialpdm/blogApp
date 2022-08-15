@@ -27,10 +27,10 @@ export class UserSignUpComponent implements OnInit {
   signUp(val:any) {
     console.log(val);
     
-    // this.serv.signUpUser(this.signupForm.value)
-    // setTimeout(() => {
-    //   this._rout.navigateByUrl("userLogin")
-    // }, 1000);
+    this.serv.signUpUser(this.signupForm.value)
+    setTimeout(() => {
+      this._rout.navigateByUrl("userLogin")
+    }, 1000);
   }
   ngOnInit() {
     console.log();
