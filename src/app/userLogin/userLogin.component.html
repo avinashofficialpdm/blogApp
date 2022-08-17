@@ -1,11 +1,10 @@
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 inputArea">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="text-center">
         <h2 class="">User Login</h2>
-
-
         <form class="example-container">
           <mat-form-field appearance="fill" class="example-full-width my-2 mt-4 ">
             <mat-label>Enter your Username</mat-label>
@@ -19,14 +18,10 @@
             </button>
           </mat-form-field>
         </form>
-        <!-- <input type="text" class="form-control mb-4" formControlName="username" placeholder="username">
-        <input type="text" class="form-control my-4" formControlName="password" placeholder="password"> -->
         <button [disabled]="loginForm.invalid" mat-raised-button color="accent">Login</button><br><br>
-
         <a routerLink="/userSignUp">Don't Have An Account ? Register One</a>
       </form>
     </div>
-    <!-- {{loginForm.value|json}} -->
     <div class="col-md-4"></div>
   </div>
 </div>

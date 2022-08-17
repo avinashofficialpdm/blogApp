@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { CountService } from '../core/Services/count.service';
 
 
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 @Component({
   selector: 'app-show-blog',
   templateUrl: './show-blog.component.html',
@@ -18,7 +21,7 @@ export class ShowBlogComponent implements OnInit {
   userlogged: boolean = false
   loggedUser: any
 
-  constructor(private _serv: BlogAppService, private _rout: Router,private _countServ:CountService) { }
+  constructor(private _serv: BlogAppService, private _rout: Router,private _countServ:CountService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this._serv.getBlogs().subscribe((res: any) => {
@@ -40,14 +43,20 @@ export class ShowBlogComponent implements OnInit {
       let count=res.length
       this._countServ.updateCount(count)
     })
+    this._serv.getUsers().subscribe((res:any)=>{
+      let count=res.length
+      this._countServ.updateUserCount(count)
+    })
   }
 
   readMore(id: number) {
     if (localStorage.getItem("userLoggedIn")) {
       this._rout.navigate(['userLogged/viewBlog', id])
     } else {
-      alert("Please Login To Read More")
-      this._rout.navigateByUrl("userLogin")
+      this._snackBar.open("Please Login To Read More","",{duration:2*1000})
+      setTimeout(() => {
+        this._rout.navigateByUrl("userLogin")
+      }, 1000);
     }
   }
 
@@ -62,12 +71,4 @@ export class ShowBlogComponent implements OnInit {
   addBlog() {
     this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
-
-  // clicked(event:any){
-  //   if(event.id!=0){
-  //     alert("Please Login To Read More")
-  //     this._rout.navigateByUrl("userLogin")
-  //   }
-  // }
-
 }

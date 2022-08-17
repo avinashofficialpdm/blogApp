@@ -27,7 +27,6 @@ export class UserLoginComponent implements OnInit {
 
   login(){
     this.serv.getUsers().subscribe((res:any)=>{
-      
       if(res.find((element:any)=>element.username==this.loginForm.value.username)){
         let currentUser = res.find((element:any)=>element.username==this.loginForm.value.username)
         if(currentUser.password==this.loginForm.value.password){
@@ -41,10 +40,7 @@ export class UserLoginComponent implements OnInit {
         }
       }else{
         alert("No user found")
-      }
-      
+      }   
     })
-  }
-
-  
+  } 
 }

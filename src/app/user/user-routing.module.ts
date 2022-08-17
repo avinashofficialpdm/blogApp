@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import { LoginGuard } from './login.guard';
+import { MyBlogsComponent } from './myBlogs/myBlogs.component';
 import { ViewBlogComponent } from './view-blog/view-blog.component';
 
 const routes: Routes = [
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path:'viewBlog/:id',
     component:ViewBlogComponent,
+    canActivate:[LoginGuard]
+  },
+  {
+    path:'myBlog/:id',
+    component:MyBlogsComponent,
     canActivate:[LoginGuard]
   }
 ];

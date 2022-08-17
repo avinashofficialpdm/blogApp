@@ -1,52 +1,45 @@
 <nav class="navbar  navbar-expand-sm navbar-dark p-3" style="background-color: rgb(96, 67, 179);">
-  <mat-icon class="me-3  text-white">gamepad</mat-icon><h1 class="navbar-brand mt-1" >Let'S BloG</h1>
+  <mat-icon class="me-3  text-white" routerLink="" style="cursor: pointer;">gamepad</mat-icon>
+  <h1 class="navbar-brand mt-1" routerLink="" style="cursor: pointer;">Let'S BloG</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-
-      <div style="position: absolute; right: 120px; top: 20px; z-index: 2;" *ngIf="userlogged"  class="text-white">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="moreBtn">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" >
-          <button mat-menu-item (click)="addBlog()" >
-            <mat-icon>note_add</mat-icon>
-            <span>Add Blog</span>
+      <li class="nav-item">
+        <div style="position: absolute; right: 120px; top: 20px; z-index: 2;" *ngIf="userlogged" class="text-white">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+            class="moreBtn">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button mat-menu-item >
-            <mat-icon> person_pin</mat-icon> 
-            <span>My Blogs</span>
-          </button>
-          <!-- <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
-          </button> -->
-
-        </mat-menu>
-        
-      </div>
-      
-      <!-- <li class="nav-item active">
-        <button class="btn btn-outline-light" style="position: absolute; right: 120px; top: 20px;" *ngIf="userlogged"
-          (click)="addBlog()">Add Blog</button>
-      </li> -->
-      <li class="nav-item active">
-        <h5 class="text-white" style="margin-left: 20rem"  *ngIf="userlogged">Welcome {{nameOfloggedUser}}</h5>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="addBlog()">
+              <mat-icon>note_add</mat-icon>
+              <span>Add Blog</span>
+            </button>
+            <button mat-menu-item (click)="myBlog()">
+              <mat-icon> person_pin</mat-icon>
+              <span>My Blogs</span>
+            </button>
+          </mat-menu>
+        </div>
       </li>
-      <li class="text-white" style="position: absolute; right: 20%; top: 25px;">
+      <li class="nav-item active">
+        <h5 class="text-white" style="margin-left: 30rem" *ngIf="userlogged">Welcome {{nameOfloggedUser}}</h5>
+      </li>
+      <li class="text-white nav-item" style="position: absolute; right: 20%; top: 15px;">
         Number of Blogs : {{countOfBlogs}}
       </li>
-      <li>
+      <li class="text-white nav-item" style="position: absolute; right: 20%; top: 45px;">
+        Number of Users : {{countOfUsers}}
+      </li>
+      <li class="nav-item">
         <button class="btn btn-danger" style="position: absolute; right: 20px; top: 20px;" (click)="logout()"
           *ngIf="userlogged">Logout</button>
         <button class="btn btn-outline-light" style="position: absolute; right: 20px; top: 20px;" (click)="login()"
           *ngIf="!userlogged">Login</button>
-
       </li>
-
     </ul>
   </div>
 </nav>

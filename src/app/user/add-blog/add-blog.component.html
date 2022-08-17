@@ -1,21 +1,15 @@
-
 <div class="container">
-    <div class="row">
+<div class="row">
         <div class="col-md-12">
             <form class="text-center" #addBlogForm ="ngForm"  (ngSubmit)="addBlog(addBlogForm.value)">
                 <h1 class="m-3 text-center my-4">Add your Blog</h1>
-                <!-- <input class="form-control m-3" type="url" placeholder="Enter the URL of image" name="image" ngModel> -->
-                <div class="input-group mb-3 m-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3">URL</span>
-                    </div>
-                    <input type="text" class="form-control" name="image" id="basic-url" aria-describedby="basic-addon3" ngModel placeholder="Enter the Image URL ( Optional )">
-                  </div>
-                <input class="form-control m-3" type="text" placeholder="Enter the name of your Blog" name="name" ngModel>
+                
+                  <input type="file" name="image" class="form-control m-3" (change)="onselectFile($event)" ngModel>
+                <input class="form-control m-3" type="text" placeholder="Enter the name of your Blog" name="name" ngModel autocomplete="off">
                 <textarea name="" id="" cols="30" rows="10" class="form-control m-3" name="content"
                     placeholder="Add your Blog here" ngModel></textarea>
                 <button class="btn btn-info w-25 my-4">Add</button>
             </form>
-        </div>-->
+        </div>
     </div>
 </div>

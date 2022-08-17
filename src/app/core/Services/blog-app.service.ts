@@ -6,19 +6,20 @@ import { Router, RouterLink } from '@angular/router';
   providedIn: 'root'
 })
 export class BlogAppService {
+  baseUrl="http://localhost:3000/"
 
   constructor(private _http: HttpClient, private _rout: Router) { }
 
   getBlogs() {
-    return this._http.get("http://localhost:3000/blogs")
+    return this._http.get(this.baseUrl+"blogs")
   }
 
   getUsers() {
-    return this._http.get("http://localhost:3000/users")
+    return this._http.get(this.baseUrl+"users")
   }
 
   signUpUser(user: any) {
-    this._http.post("http://localhost:3000/users", user).subscribe({
+    this._http.post(this.baseUrl+"users", user).subscribe({
       next() { alert("success") },
       error() {
         console.log(Error);
@@ -27,7 +28,7 @@ export class BlogAppService {
   }
 
   addBlog(blog: any) {
-    this._http.post("http://localhost:3000/blogs", blog).subscribe({
+    this._http.post(this.baseUrl+"blogs", blog).subscribe({
       next() { alert("success");},
       error() {
         console.log(Error);
@@ -36,12 +37,8 @@ export class BlogAppService {
     })
   }
 
-  // addBlog(blog: any) {
-  //  return this._http.post("http://localhost:3000/blogs", blog)
-  // }
-
   addComment(id:number,updatedData:any){
-    this._http.put("http://localhost:3000/blogs/"+id,updatedData).subscribe({
+    this._http.put(this.baseUrl+"blogs/"+id,updatedData).subscribe({
       next() {
     window.location.reload() },
       error() {
@@ -50,4 +47,7 @@ export class BlogAppService {
     })
   }
 
+  deleteBlog(i:number){
+    return this._http.delete(this.baseUrl+"blogs/"+i)
+  }
 }

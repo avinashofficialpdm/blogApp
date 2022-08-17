@@ -10,38 +10,43 @@ import { BlogAppService } from 'src/app/core/Services/blog-app.service';
 })
 export class AddBlogComponent implements OnInit {
 
-  loggedUserId:any
-  loggedUser:any
+  loggedUserId: any
+  loggedUser: any
+  imageUrl: any
   constructor(
-    private serv:BlogAppService,
-    private route:ActivatedRoute,
-    private _http:BlogAppService,
-    private _rout:Router) { }
-
-
-  // addBlogForm = new FormGroup({
-  //   name: new FormControl(''),
-  //   content: new FormControl('')
-  //   author:new FormControl(this.loggedUser.name)
-  // })
-  // addBlogForm
+    private serv: BlogAppService,
+    private route: ActivatedRoute,
+    private _http: BlogAppService,
+    private _rout: Router) { }
 
   ngOnInit(): void {
-    this.loggedUserId=this.route.snapshot.paramMap.get("id")
-    console.log(this.loggedUserId);
-    this._http.getUsers().subscribe((res:any)=>{
-    this.loggedUser=res.find((element:any)=>element.id==this.loggedUserId)
-    console.log(this.loggedUser.name);
-    
+    this.loggedUserId = this.route.snapshot.paramMap.get("id")
+    this._http.getUsers().subscribe((res: any) => {
+      this.loggedUser = res.find((element: any) => element.id == this.loggedUserId)
     })
-    
+
   }
 
-  addBlog(formValues:any){
-    formValues.authorUname=this.loggedUser.username
-    formValues.author=this.loggedUser.name
-    formValues.date=new Date()
-    formValues.comments=[]
+  onselectFile(event: any) {
+    if (event.target.files) {
+      console.log(event.target.files);
+      
+      let reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result
+
+      }
+    }
+  }
+
+  addBlog(formValues: any) {
+    formValues.authorUname = this.loggedUser.username
+    formValues.author = this.loggedUser.name
+    formValues.date = new Date()
+    formValues.comments = []
+    formValues.image = this.imageUrl
+
     console.log(formValues);
     this.serv.addBlog(formValues)
     setTimeout(() => {

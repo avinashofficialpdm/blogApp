@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   loggedUser: any
   nameOfloggedUser: any
   countOfBlogs: any
+  countOfUsers:any
   constructor(private _rout: Router, private countServ: CountService) { }
 
   ngOnInit() {
@@ -23,8 +24,7 @@ export class HeaderComponent implements OnInit {
       this.loggedUser = localStorage.getItem("userLoggedIn")
     }
     this.countServ.countSubject.subscribe(number => { this.countOfBlogs = number })
-
-
+    this.countServ.userCountSubject.subscribe(number => { this.countOfUsers = number })
   }
 
   logout() {
@@ -36,15 +36,15 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-
     this._rout.navigateByUrl("userLogin")
-
   }
 
   addBlog() {
     this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
 
-
+  myBlog() {
+    this._rout.navigate(['userLogged/myBlog', this.loggedUser])
+  }
 
 }
