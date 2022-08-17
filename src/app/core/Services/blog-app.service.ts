@@ -18,6 +18,7 @@ export class BlogAppService {
     return this._http.get(this.baseUrl+"users")
   }
 
+  
   signUpUser(user: any) {
     this._http.post(this.baseUrl+"users", user).subscribe({
       next() { alert("success") },
@@ -49,5 +50,9 @@ export class BlogAppService {
 
   deleteBlog(i:number){
     return this._http.delete(this.baseUrl+"blogs/"+i)
+  }
+
+  deleteUser(id:number){
+    return this._http.delete(this.baseUrl+"users/"+id)
   }
 }

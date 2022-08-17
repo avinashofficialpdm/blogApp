@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogAppService } from '../core/Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountService } from '../core/Services/count.service';
 
 
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -15,36 +15,50 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ShowBlogComponent implements OnInit {
 
+  // for pagination
   p = 1
+
+  // for icon
   faUser = faUser
+
   blogList: any[] = []
   userlogged: boolean = false
-  loggedUser: any
+  loggedUser:any
 
-  constructor(private _serv: BlogAppService, private _rout: Router,private _countServ:CountService,private _snackBar: MatSnackBar) { }
+  constructor(private _serv: BlogAppService,
+    private _rout: Router,
+    private _countServ: CountService,
+    private _snackBar: MatSnackBar,
+    private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this._serv.getBlogs().subscribe((res: any) => {
-      this.blogList = res
-      this.blogList.sort(function compare(obj1, obj2) { return <any> new Date(obj2.date) - <any> new Date(obj1.date) })
-      this.blogList.forEach((element: any) => {
-        if (element.image == "") {
-          element.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
-        }
-      })
+
+    // for resolve the data
+    this.blogList = this._route.snapshot.data['data']
+
+    // for sort the blogs using the dates uploaded
+    this.blogList.sort(function compare(obj1, obj2) { return <any>new Date(obj2.date) - <any>new Date(obj1.date) })
+
+    // for add alternate image when the imgage is not uploaded
+    this.blogList.forEach((element: any) => {
+      if (element.image == "") {
+        element.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
+      }
     })
+
+
 
     if (localStorage.getItem('userLoggedIn')) {
       this.userlogged = true
       this.loggedUser = localStorage.getItem("userLoggedIn")
-    } 
+    }
 
-    this._serv.getBlogs().subscribe((res:any)=>{
-      let count=res.length
+    this._serv.getBlogs().subscribe((res: any) => {
+      let count = res.length
       this._countServ.updateCount(count)
     })
-    this._serv.getUsers().subscribe((res:any)=>{
-      let count=res.length
+    this._serv.getUsers().subscribe((res: any) => {
+      let count = res.length
       this._countServ.updateUserCount(count)
     })
   }
@@ -53,7 +67,7 @@ export class ShowBlogComponent implements OnInit {
     if (localStorage.getItem("userLoggedIn")) {
       this._rout.navigate(['userLogged/viewBlog', id])
     } else {
-      this._snackBar.open("Please Login To Read More","",{duration:2*1000})
+      this._snackBar.open("Please Login To Read More", "", { duration: 2 * 1000 })
       setTimeout(() => {
         this._rout.navigateByUrl("userLogin")
       }, 1000);
@@ -67,7 +81,7 @@ export class ShowBlogComponent implements OnInit {
       window.location.reload()
     }
   }
-  
+
   addBlog() {
     this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }

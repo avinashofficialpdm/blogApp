@@ -13,20 +13,28 @@ export class MyBlogsComponent implements OnInit {
   currentUser: any
   myBlogs: any[] = []
   loggedUser:any
-  constructor(private serv: BlogAppService,private _rout:Router) { }
+  constructor(private serv: BlogAppService,
+    private _rout:Router,
+    private _route:ActivatedRoute) { }
 
   ngOnInit() {
     this.loggedUser = localStorage.getItem("userLoggedIn")
     this.curentUserId= localStorage.getItem("userLoggedIn")
     this.serv.getUsers().subscribe((user:any)=>{
       this.currentUser= user.find((element:any)=>element.id==this.curentUserId)
-      this.serv.getBlogs().subscribe((blogs:any)=>{
-        blogs.forEach((blog:any) => {
+
+
+
+     let Blogs= this._route.snapshot.data['myBlogs']
+        Blogs.forEach((blog:any) => {
           if(blog.author==this.currentUser.name){
             this.myBlogs.push(blog)
           }
         });
-      })
+      
+
+
+
     })
     this.myBlogs.sort(function compare(obj1, obj2) { return <any> new Date(obj2.date) - <any> new Date(obj1.date) }) 
   }

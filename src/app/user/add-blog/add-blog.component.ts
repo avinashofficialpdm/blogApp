@@ -29,8 +29,6 @@ export class AddBlogComponent implements OnInit {
 
   onselectFile(event: any) {
     if (event.target.files) {
-      console.log(event.target.files);
-      
       let reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event: any) => {
@@ -46,8 +44,6 @@ export class AddBlogComponent implements OnInit {
     formValues.date = new Date()
     formValues.comments = []
     formValues.image = this.imageUrl
-
-    console.log(formValues);
     this.serv.addBlog(formValues)
     setTimeout(() => {
       this._rout.navigateByUrl("")

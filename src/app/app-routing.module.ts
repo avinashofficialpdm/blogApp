@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogsResolveGuard } from './blogs-resolve.guard';
 import { ShowBlogComponent } from './show-blog/show-blog.component';
 import { UserLoginComponent } from './userLogin/userLogin.component';
 import { UserSignUpComponent } from './userSignUp/userSignUp.component';
@@ -7,7 +8,10 @@ import { UserSignUpComponent } from './userSignUp/userSignUp.component';
 const routes: Routes = [
   {
     path: "",
-    component: ShowBlogComponent
+    component: ShowBlogComponent,
+    resolve:{
+      data:BlogsResolveGuard
+    }
   },
   {
     path: 'userLogin',

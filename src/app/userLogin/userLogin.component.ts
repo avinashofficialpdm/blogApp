@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BlogAppService } from '../core/Services/blog-app.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -11,36 +12,38 @@ import { BlogAppService } from '../core/Services/blog-app.service';
 })
 export class UserLoginComponent implements OnInit {
 
-  loggedUsername:any
   hide = true;
-  durationInSeconds = 5;
+  loggedUsername:string=""
+  // loggedUsername?:string|null=""
 
-  constructor(private serv:BlogAppService,private _rout:Router) { }
+  constructor(private serv: BlogAppService, private _rout: Router, private _snackBar: MatSnackBar) { }
 
-  loginForm=new FormGroup({
-    username:new FormControl('',[Validators.required]),
-    password:new FormControl('',[Validators.required])
+  loginForm = new FormGroup({
+    username: new FormControl<string>('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
   })
 
   ngOnInit() {
   }
 
-  login(){
-    this.serv.getUsers().subscribe((res:any)=>{
-      if(res.find((element:any)=>element.username==this.loginForm.value.username)){
-        let currentUser = res.find((element:any)=>element.username==this.loginForm.value.username)
-        if(currentUser.password==this.loginForm.value.password){
-          this.loggedUsername=this.loginForm.value.username
-          localStorage.setItem("userLoggedIn",currentUser.id)
-          localStorage.setItem("loggedUser",currentUser.name)
-          alert("Login success")
-          this._rout.navigateByUrl("")
-        }else{
+  login() {
+    this.serv.getUsers().subscribe((res: any) => {
+      if (res.find((element: any) => element.username == this.loginForm.value.username)) {
+        let currentUser = res.find((element: any) => element.username == this.loginForm.value.username)
+        if (currentUser.password == this.loginForm.value.password) {
+          this.loggedUsername = <string><any>this.loginForm.value.username
+          localStorage.setItem("userLoggedIn", currentUser.id)
+          localStorage.setItem("loggedUser", currentUser.name)
+          this._snackBar.open("Login success", "", { duration: 2 * 1000 })
+          setTimeout(() => {
+            this._rout.navigateByUrl("")
+          }, 1000);
+        } else {
           alert("Wrong password")
         }
-      }else{
+      } else {
         alert("No user found")
-      }   
+      }
     })
-  } 
+  }
 }

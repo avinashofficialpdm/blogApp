@@ -1,36 +1,28 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BlogAppService } from './blog-app.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountService {
 
-  blogsCount: any
-  userCount:any
+  //creating a behavior subject with initial value 0 
   public countSubject = new BehaviorSubject<number>(0)
   
+  //creating a behavior subject with initial value 0 
   public userCountSubject = new BehaviorSubject<number>(0)
 
-  constructor(private blogServ: BlogAppService) {
 
-  }
+  constructor() {}
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.blogServ.getBlogs().subscribe((res: any) => {
-      this.blogsCount = res.length
-    })
-    this.blogServ.getUsers().subscribe((res: any) => {
-      this.userCount = res.length
-    })
-  }
-
-  updateCount(data: any) {
+  // update function for blogsCount
+  updateCount(data: number) {
     this.countSubject.next(data)
   }
 
-  updateUserCount(data: any) {
+  // update function for userCount
+  updateUserCount(data: number) {
     this.userCountSubject.next(data)
   }
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogsResolveGuard } from '../blogs-resolve.guard';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import { LoginGuard } from './login.guard';
 import { MyBlogsComponent } from './myBlogs/myBlogs.component';
@@ -9,7 +10,8 @@ const routes: Routes = [
   {
     path:'addBlog/:id',
     component:AddBlogComponent,
-    canActivate:[LoginGuard]
+    canActivate:[LoginGuard],
+
   },
   {
     path:'viewBlog/:id',
@@ -19,7 +21,10 @@ const routes: Routes = [
   {
     path:'myBlog/:id',
     component:MyBlogsComponent,
-    canActivate:[LoginGuard]
+    canActivate:[LoginGuard],
+    resolve:{
+      myBlogs:BlogsResolveGuard
+    }
   }
 ];
 

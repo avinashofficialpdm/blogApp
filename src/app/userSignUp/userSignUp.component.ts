@@ -10,6 +10,7 @@ import { BlogAppService } from '../core/Services/blog-app.service';
 })
 export class UserSignUpComponent implements OnInit {
 
+  // for hide and show button of password
   hide = true;
 
   constructor(private serv: BlogAppService,private _rout:Router) { }
@@ -20,10 +21,12 @@ export class UserSignUpComponent implements OnInit {
     password: new FormControl('',[Validators.required])
   })
 
+  // to get the controls of form for validation
   get signupFormControl() {
     return this.signupForm.controls;
   }
 
+  // signup function when click the signup button
   signUp() {
     this.serv.signUpUser(this.signupForm.value)
     setTimeout(() => {
