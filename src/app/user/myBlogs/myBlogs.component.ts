@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogAppService } from 'src/app/core/Services/blog-app.service';
+import { BlogAppService } from 'src/app/Services/blog-app.service';
 
 @Component({
   selector: 'app-myBlogs',
@@ -21,25 +21,21 @@ export class MyBlogsComponent implements OnInit {
     this.loggedUser = localStorage.getItem("userLoggedIn")
     this.curentUserId= localStorage.getItem("userLoggedIn")
     this.serv.getUsers().subscribe((user:any)=>{
-      this.currentUser= user.find((element:any)=>element.id==this.curentUserId)
-
-
-
+    this.currentUser= user.find((element:any)=>element.id==this.curentUserId)
+    
+      // 'myblogs' took from resolve guard
      let Blogs= this._route.snapshot.data['myBlogs']
+     
         Blogs.forEach((blog:any) => {
           if(blog.author==this.currentUser.name){
             this.myBlogs.push(blog)
           }
         });
-      
-
-
-
     })
-    this.myBlogs.sort(function compare(obj1, obj2) { return <any> new Date(obj2.date) - <any> new Date(obj1.date) }) 
+    this.myBlogs.sort(function compare(obj1, obj2) { return <any>new Date(obj2.date) - <any>new Date(obj1.date) })
   }
 
-  deleteBlog(i:number){
+  deleteBlog(i:number):void{
     if(confirm("Are you sure ? ")){
       this.serv.deleteBlog(i).subscribe((res:any)=>{
         window.location.reload()
@@ -47,7 +43,7 @@ export class MyBlogsComponent implements OnInit {
     }
   }
 
-  addBlog() {
+  addBlog():void {
     this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
 

@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
   constructor(private _rout: Router) { }
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): any {
+  canActivate(): any {
     if (localStorage.getItem("userLoggedIn")) {
       return true
     } else {

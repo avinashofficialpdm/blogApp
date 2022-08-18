@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate:[LoginGuard]
   },
   {
-    path:'myBlog/:id',
+    path:'myBlog',
     component:MyBlogsComponent,
     canActivate:[LoginGuard],
     resolve:{

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,16 @@ export class BlogAppService {
 
   constructor(private _http: HttpClient, private _rout: Router) { }
 
-  getBlogs() {
+  getBlogs():Observable<object> {
     return this._http.get(this.baseUrl+"blogs")
   }
 
-  getUsers() {
+  getUsers():Observable<object> {
     return this._http.get(this.baseUrl+"users")
   }
 
   
-  signUpUser(user: any) {
+  signUpUser(user: any):void {
     this._http.post(this.baseUrl+"users", user).subscribe({
       next() { alert("success") },
       error() {
@@ -28,7 +29,7 @@ export class BlogAppService {
     })
   }
 
-  addBlog(blog: any) {
+  addBlog(blog: any):void {
     this._http.post(this.baseUrl+"blogs", blog).subscribe({
       next() { alert("success");},
       error() {
@@ -39,20 +40,15 @@ export class BlogAppService {
   }
 
   addComment(id:number,updatedData:any){
-    this._http.put(this.baseUrl+"blogs/"+id,updatedData).subscribe({
-      next() {
-    window.location.reload() },
-      error() {
-        console.log(Error);
-      }
-    })
+    return this._http.put(this.baseUrl+"blogs/"+id,updatedData)
   }
 
-  deleteBlog(i:number){
+  deleteBlog(i:number):Observable<object>{
     return this._http.delete(this.baseUrl+"blogs/"+i)
   }
 
-  deleteUser(id:number){
+  
+  deleteUser(id:number):Observable<object>{
     return this._http.delete(this.baseUrl+"users/"+id)
   }
 }

@@ -17,12 +17,12 @@ export class CountService {
   ngOnInit() {}
 
   // update function for blogsCount
-  updateCount(data: number) {
+  updateCount(data: number):void {
     this.countSubject.next(data)
   }
 
   // update function for userCount
-  updateUserCount(data: number) {
+  updateUserCount(data: number) :void{
     this.userCountSubject.next(data)
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BlogAppService } from '../core/Services/blog-app.service';
+import { BlogAppService } from '../Services/blog-app.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 

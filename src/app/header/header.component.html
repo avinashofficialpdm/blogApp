@@ -18,7 +18,7 @@
               <mat-icon>note_add</mat-icon>
               <span>Add Blog</span>
             </button>
-            <button mat-menu-item (click)="myBlog()">
+            <button mat-menu-item routerLink="userLogged/myBlog">
               <mat-icon> person_pin</mat-icon>
               <span>My Blogs</span>
             </button>
@@ -41,7 +41,7 @@
       <li class="nav-item">
         <button class="btn btn-danger" style="position: absolute; right: 20px; top: 20px;" (click)="logout()"
           *ngIf="userlogged">Logout</button>
-        <button class="btn btn-outline-light" style="position: absolute; right: 20px; top: 20px;" (click)="login()"
+        <button class="btn btn-outline-light" style="position: absolute; right: 20px; top: 20px;" routerLink="userLogin"
           *ngIf="!userlogged">Login</button>
       </li>
     </ul>

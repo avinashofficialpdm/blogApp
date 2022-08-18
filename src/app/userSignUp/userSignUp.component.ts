@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BlogAppService } from '../core/Services/blog-app.service';
+import { BlogAppService } from '../Services/blog-app.service';
 
 @Component({
   selector: 'app-userSignUp',
@@ -13,12 +13,12 @@ export class UserSignUpComponent implements OnInit {
   // for hide and show button of password
   hide = true;
 
-  constructor(private serv: BlogAppService,private _rout:Router) { }
+  constructor(private serv: BlogAppService, private _rout: Router) { }
 
   signupForm = new FormGroup({
-    name: new FormControl('',[Validators.required,Validators.pattern("^[A-Za-z]*$")]),
-    username: new FormControl('',[Validators.required,Validators.pattern("^[A-Za-z0-9]*$")]),
-    password: new FormControl('',[Validators.required])
+    name: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z ]*$")]),
+    username: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z0-9]*$")]),
+    password: new FormControl('', [Validators.required])
   })
 
   // to get the controls of form for validation
@@ -34,6 +34,6 @@ export class UserSignUpComponent implements OnInit {
     }, 1000);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

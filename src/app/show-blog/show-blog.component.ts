@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogAppService } from '../core/Services/blog-app.service';
+import { BlogAppService } from '../Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CountService } from '../core/Services/count.service';
+import { CountService } from '../Services/count.service';
 
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -63,7 +63,7 @@ export class ShowBlogComponent implements OnInit {
     })
   }
 
-  readMore(id: number) {
+  readMore(id:number):void {
     if (localStorage.getItem("userLoggedIn")) {
       this._rout.navigate(['userLogged/viewBlog', id])
     } else {
@@ -74,15 +74,14 @@ export class ShowBlogComponent implements OnInit {
     }
   }
 
-  logout() {
+  logout():void{
     if (confirm("Are you sure you want to Logout")) {
       localStorage.removeItem("userLoggedIn")
       this._rout.navigateByUrl("")
-      window.location.reload()
     }
   }
 
-  addBlog() {
+  addBlog():void{
     this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
 }

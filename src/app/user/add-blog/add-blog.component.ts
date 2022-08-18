@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogAppService } from 'src/app/core/Services/blog-app.service';
+import { BlogAppService } from 'src/app/Services/blog-app.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -20,6 +20,8 @@ export class AddBlogComponent implements OnInit {
     private _rout: Router) { }
 
   ngOnInit(): void {
+
+    // took the current user id from parametrs and retrived the full object of current user
     this.loggedUserId = this.route.snapshot.paramMap.get("id")
     this._http.getUsers().subscribe((res: any) => {
       this.loggedUser = res.find((element: any) => element.id == this.loggedUserId)
@@ -27,28 +29,32 @@ export class AddBlogComponent implements OnInit {
 
   }
 
-  onselectFile(event: any) {
+  // reads the url of image when choose any image in input:file using fileReader and saved the url to imageUrl variable
+  onselectFile(event: any):void {
     if (event.target.files) {
       let reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event: any) => {
         this.imageUrl = event.target.result
-
       }
     }
   }
 
-  addBlog(formValues: any) {
+  // adding the additional details and image url of the blog and sending post request
+  addBlog(formValues: any):void{
     formValues.authorUname = this.loggedUser.username
     formValues.author = this.loggedUser.name
     formValues.date = new Date()
     formValues.comments = []
-    formValues.image = this.imageUrl
+    if(this.imageUrl==undefined){
+      formValues.image="https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
+    }else{
+      formValues.image = this.imageUrl
+    }
     this.serv.addBlog(formValues)
     setTimeout(() => {
       this._rout.navigateByUrl("")
     }, 1000);
   }
-
 
 }
