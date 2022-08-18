@@ -28,10 +28,25 @@ export class UserSignUpComponent implements OnInit {
 
   // signup function when click the signup button
   signUp() {
-    this.serv.signUpUser(this.signupForm.value)
-    setTimeout(() => {
-      this._rout.navigateByUrl("userLogin")
-    }, 1000);
+
+    this.serv.getUsers().subscribe((res:any)=>{
+      let allUsers=res
+      let isAlreadyUser =allUsers.findIndex((res:any)=>res.username==this.signupForm.value.username)
+      if(isAlreadyUser==-1){
+        this.serv.signUpUser(this.signupForm.value).subscribe((res:any)=>{
+          alert("success")
+          console.log(res);
+        })
+        setTimeout(() => {
+          this._rout.navigateByUrl("userLogin")
+        }, 1000);
+      }else{
+        alert("please choose anthor username")
+      }
+      
+    })
+
+    
   }
 
   ngOnInit() { }

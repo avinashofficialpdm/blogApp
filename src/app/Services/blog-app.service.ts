@@ -20,13 +20,8 @@ export class BlogAppService {
   }
 
   
-  signUpUser(user: any):void {
-    this._http.post(this.baseUrl+"users", user).subscribe({
-      next() { alert("success") },
-      error() {
-        console.log(Error);
-      }
-    })
+  signUpUser(user: any) {
+    return this._http.post(this.baseUrl+"users", user)
   }
 
   addBlog(blog: any):void {
