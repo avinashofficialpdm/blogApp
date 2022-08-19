@@ -42,8 +42,7 @@ export class HeaderComponent implements OnInit {
     if (confirm("Are you sure you want to Logout")) {
       localStorage.removeItem("userLoggedIn")
       this.isLoggedIn()
-      this._rout.navigateByUrl("userLogin")
-      
+      location.replace("")
     }
   }
 
@@ -52,11 +51,10 @@ export class HeaderComponent implements OnInit {
   deleteAccount() :void{
     if (confirm("Are you sure you want to delete your Account")) {
       this.blogServ.deleteUser(this.loggedUserId).subscribe((res: any) => {
-        console.log(res);
         alert("Deleted Successfully")
         localStorage.clear()
         this.isLoggedIn()
-      this._rout.navigateByUrl("userLogin")
+        location.replace("")
       })
     }
   }

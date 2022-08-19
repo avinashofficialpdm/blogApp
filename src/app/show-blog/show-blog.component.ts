@@ -78,6 +78,7 @@ export class ShowBlogComponent implements OnInit {
     if (confirm("Are you sure you want to Logout")) {
       localStorage.removeItem("userLoggedIn")
       this._rout.navigateByUrl("")
+      // location.replace("")
     }
   }
 
