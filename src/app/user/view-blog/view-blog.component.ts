@@ -27,12 +27,6 @@ export class ViewBlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentBlogId = this.route.snapshot.paramMap.get("id")
-    // this.serv.getBlogs().subscribe((res: any) => {
-    //   this.currentBlog = res.find((element: any) => element.id == this.currentBlogId)
-    //   this.comments = this.currentBlog.comments
-
-    // })
-
     this.blogs()
     this.serv.getUsers().subscribe((res: any) => {
       this.currentUser = res.find((user: any) => user.id == localStorage.getItem("userLoggedIn"))

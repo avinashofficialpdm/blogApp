@@ -4,8 +4,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountService } from '../Services/count.service';
 
-
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Blog } from '../models/blog';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,14 +17,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ShowBlogComponent implements OnInit {
 
   // for pagination
-  p = 1
+  p:number = 1
 
   // for icon
   faUser = faUser
 
-  blogList: any[] = []
+  blogList: Blog[] = []
   userlogged: boolean = false
-  loggedUser:any
+  loggedUser?:string|null
 
   constructor(private _serv: BlogAppService,
     private _rout: Router,
@@ -37,10 +38,10 @@ export class ShowBlogComponent implements OnInit {
     this.blogList = this._route.snapshot.data['data']
 
     // for sort the blogs using the dates uploaded
-    this.blogList.sort(function compare(obj1, obj2) { return <any>new Date(obj2.date) - <any>new Date(obj1.date) })
+    this.blogList.sort(function compare(obj1, obj2) { return <any|Date>new Date(obj2.date) - <any|Date>new Date(obj1.date) })
 
     // for add alternate image when the imgage is not uploaded
-    this.blogList.forEach((element: any) => {
+    this.blogList.forEach((element: Blog) => {
       if (element.image == "") {
         element.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
       }
@@ -53,11 +54,11 @@ export class ShowBlogComponent implements OnInit {
       this.loggedUser = localStorage.getItem("userLoggedIn")
     }
 
-    this._serv.getBlogs().subscribe((res: any) => {
+    this._serv.getBlogs().subscribe((res:any) => {
       let count = res.length
       this._countServ.updateCount(count)
     })
-    this._serv.getUsers().subscribe((res: any) => {
+    this._serv.getUsers().subscribe((res:any) => {
       let count = res.length
       this._countServ.updateUserCount(count)
     })
@@ -72,17 +73,5 @@ export class ShowBlogComponent implements OnInit {
         this._rout.navigateByUrl("userLogin")
       }, 1000);
     }
-  }
-
-  logout():void{
-    if (confirm("Are you sure you want to Logout")) {
-      localStorage.removeItem("userLoggedIn")
-      this._rout.navigateByUrl("")
-      // location.replace("")
-    }
-  }
-
-  addBlog():void{
-    this._rout.navigate(['userLogged/addBlog', this.loggedUser])
   }
 }

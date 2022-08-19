@@ -11,9 +11,8 @@ import { CountService } from 'src/app/Services/count.service';
 export class HeaderComponent implements OnInit {
 
   userlogged: boolean = false
-  loggedUserId: any
+  loggedUserId: string|null=""
   nameOfloggedUser?: string|null
-
   countOfBlogs?: number
   countOfUsers?: number
 
@@ -30,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  isLoggedIn(){
+  isLoggedIn():void{
     if (localStorage.getItem('userLoggedIn')) {
       this.userlogged = true
       this.nameOfloggedUser = localStorage.getItem("loggedUser")

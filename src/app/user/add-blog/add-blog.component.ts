@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Blog } from 'src/app/models/blog';
 import { BlogAppService } from 'src/app/Services/blog-app.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { BlogAppService } from 'src/app/Services/blog-app.service';
 })
 export class AddBlogComponent implements OnInit {
 
-  loggedUserId: any
-  loggedUser: any
-  imageUrl: any
+  loggedUserId?: string|null
+  imageUrl?: string
+  loggedUser:any
   constructor(
     private serv: BlogAppService,
     private route: ActivatedRoute,
@@ -34,14 +34,14 @@ export class AddBlogComponent implements OnInit {
     if (event.target.files) {
       let reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
-      reader.onload = (event: any) => {
+      reader.onload = (event:any) => {
         this.imageUrl = event.target.result
       }
     }
   }
 
   // adding the additional details and image url of the blog and sending post request
-  addBlog(formValues: any):void{
+  addBlog(formValues: Blog):void{
     formValues.authorUname = this.loggedUser.username
     formValues.author = this.loggedUser.name
     formValues.date = new Date()
