@@ -27,7 +27,7 @@ export class MyBlogsComponent implements OnInit {
      let Blogs= this._route.snapshot.data['myBlogs']
      
         Blogs.forEach((blog:any) => {
-          if(blog.author==this.currentUser.name){
+          if(blog.authorUname==this.currentUser.username){
             this.myBlogs.push(blog)
           }
         });
