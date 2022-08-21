@@ -38,7 +38,7 @@ export class MyBlogsComponent implements OnInit {
   deleteBlog(i:number):void{
     if(confirm("Are you sure ? ")){
       this.serv.deleteBlog(i).subscribe((res:any)=>{
-        window.location.reload()
+        location.replace("")
       })
     }
   }
